@@ -1,0 +1,31 @@
+name: 'workflow'
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  test-update-file:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Update the file 1st occurence
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: 'dockerfile.yaml'
+          propertyPath: 'services.auth.image'
+          value: full-path-of:the:idiotic-image.v1_and-who
+          commitChange: false
+
+      - name: Update the file 2nd occurence
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: 'dockerfile.yaml'
+          propertyPath: 'services.daemon.image'
+          value: version.2h-of:the:idiotic-image.v2_and-who
+          commitChange: false
+
+      - name: cat the file
+	run: |
+	  cat dokerfile.yaml

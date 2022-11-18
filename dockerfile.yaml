@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  auth:
+    image: damn
+    ports:
+      - "4001:4001"
+    environment:
+      - AUTH_APP_SETTINGS=./config/qa.cfg
+    volumes:
+      - efs1:/var/data
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: sidepocket-dev
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: auth
+
+  daemon:
+    image: damn
+    volumes:
+      - efs1:/var/data
+    environment:
+      - AUTH_APP_SETTINGS=./config/qa.cfg
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: sidepocket-dev
+        awslogs-region: us-east-1
+        awslogs-stream-prefix: auth-daemon
+
+volumes:
+  efs1
