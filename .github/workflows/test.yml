@@ -27,5 +27,5 @@ jobs:
           commitChange: false
 
       - name: cat the file
-	run: |
-		cat dockerfile.yaml
+        run: |
+          cat dockerfile.yaml
