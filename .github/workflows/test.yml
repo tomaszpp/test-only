@@ -28,4 +28,4 @@ jobs:
 
       - name: cat the file
 	run: |
-	  cat dokerfile.yaml
+		cat dockerfile.yaml
